@@ -1,10 +1,14 @@
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { signOut } from "../actions/Auth";
-import { getCurrentUser } from "../actions/Auth";
+import { cookies } from "next/headers";
 import { User } from "@supabase/supabase-js";
-const currentUser = await getCurrentUser();
+import { createClient } from "../../utils/supabase/server";
 
-export default function Page() {
+export default async function Page() {
+	const cookieStore = cookies();
+	const supabase = createClient(cookieStore);
+	const { data: user } = await supabase.auth.getUser();
+	const currentUser = user.user as User;
 	if (!currentUser) {
 		return <div>Loading...</div>;
 	}
