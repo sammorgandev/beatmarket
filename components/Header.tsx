@@ -5,14 +5,16 @@ import { useEffect, useState } from "react";
 import { getCurrentUser } from "@/app/actions/Auth";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
+import { usePathname } from "next/navigation";
 const navigation = [
-	{ name: "Home", href: "#" },
-	{ name: "Genres", href: "#" },
-	{ name: "Free", href: "#" },
-	{ name: "Exclusive", href: "#" },
+	{ name: "Home", href: "/" },
+	{ name: "Genres", href: "/genres" },
+	{ name: "Free", href: "/free" },
+	{ name: "Upload", href: "/upload" },
 ];
 
 export default function Page() {
+	const pathname = usePathname();
 	const [scroll, setScroll] = useState(false);
 	const [user, setUser] = useState<User | null>(null);
 	const supabase = createClient();
@@ -66,7 +68,11 @@ export default function Page() {
 							<a
 								key={item.name}
 								href={item.href}
-								className="text-sm font-semibold leading-6 text-white">
+								className={
+									pathname === item.href
+										? "text-sm font-semibold leading-6 text-indigo-400"
+										: "text-sm font-semibold leading-6 text-white"
+								}>
 								{item.name}
 							</a>
 						))}
@@ -75,7 +81,15 @@ export default function Page() {
 					<div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
 						<a
 							href={user ? "/profile" : "/start"}
-							className="text-sm font-semibold leading-6 text-white">
+							className={
+								user && pathname === "/profile"
+									? "text-sm font-semibold leading-6 text-indigo-400"
+									: user && pathname != "/profile"
+									? "text-sm font-semibold leading-6 text-white"
+									: !user && pathname === "/start"
+									? "text-sm font-semibold leading-6 text-indigo-400"
+									: "text-sm font-semibold leading-6 text-white"
+							}>
 							{user ? user.email : "Upload a beat"}{" "}
 							<span aria-hidden="true"> &nbsp; &rarr;</span>
 						</a>
