@@ -59,14 +59,15 @@ export default function Page() {
 											</h2>
 
 											<span className="text-gray-400">/</span>
-											{beat.categories.map((category) => (
-												<Link
-													href={`/genres/${category}`}
-													key={category}
-													className="text-gray-300 hover:text-indigo-400">
-													{category}
-												</Link>
-											))}
+											{beat.categories &&
+												beat.categories.map((category) => (
+													<Link
+														href={`/genres/${category}`}
+														key={category}
+														className="text-gray-300 hover:text-indigo-400">
+														{category}
+													</Link>
+												))}
 										</div>
 										<div className="mt-3 flex items-center gap-x-2.5 text-xs leading-5 text-gray-400">
 											<p className="truncate">{beat.description}</p>
@@ -76,7 +77,7 @@ export default function Page() {
 												<circle cx={1} cy={1} r={1} />
 											</svg>
 											<p className="whitespace-nowrap">
-												{beat.categories.toString()}
+												{beat.categories && beat.categories.toString()}
 											</p>
 										</div>
 									</div>
