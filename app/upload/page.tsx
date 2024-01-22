@@ -3,57 +3,8 @@ import { SpeakerWaveIcon } from "@heroicons/react/24/outline";
 import { useDropzone } from "react-dropzone";
 import { useState } from "react";
 import uploadFile from "../actions/uploadFile";
+import { musicalTags } from "../components/Lists";
 export default function Page({ categories }: { categories: Array<string> }) {
-	const musicalTags = [
-		//generate a list of musical tags
-		"808",
-		"acoustic",
-		"aggressive",
-		"ambient",
-		"atmospheric",
-		"ballad",
-		"bass",
-		"beat",
-		"bells",
-		"bouncy",
-		"bright",
-		"calm",
-		"catchy",
-		"celebratory",
-		"cheerful",
-		"chill",
-		"chillhop",
-		"chillout",
-		"cinematic",
-		"classical",
-		"club",
-		"commercial",
-		"cool",
-		"country",
-		"dance",
-		"dark",
-		"deep",
-		"determined",
-		"digital",
-		"dreamy",
-		"driving",
-		"dubstep",
-		"dynamic",
-		"easy",
-		"edm",
-		"electric",
-		"electronic",
-		"emotional",
-		"energetic",
-		"epic",
-		"ethereal",
-		"fast",
-		"feel good",
-		"film",
-		"flowing",
-		"folk",
-	];
-
 	const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 	const uploadBeat = uploadFile.bind(null, selectedGenres);
 	const toggleGenre = (genre: string) => {

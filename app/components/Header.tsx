@@ -1,5 +1,5 @@
 "use client";
-import MobileMenu from "@/components/MobileMenu";
+import MobileMenu from "@/app/components/MobileMenu";
 import { AdjustmentsVerticalIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "@/app/actions/Auth";
